@@ -248,9 +248,14 @@ namespace UpholdSdk
                 _client = client;
             }
 
-            public List<Models.Ticker> List(string currency)
+            public List<Models.Ticker> ListForCurrency(string currency)
             {
                 return _client.RequestGetList<Models.Ticker>($"/v0/ticker/{currency}", false);
+            }
+
+            public List<Models.Ticker> ListForPair(string pair)
+            {
+                return _client.RequestGetList<Models.Ticker>($"/v0/ticker/{pair}", false);
             }
 
         }
