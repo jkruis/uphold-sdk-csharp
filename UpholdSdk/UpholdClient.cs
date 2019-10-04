@@ -14,6 +14,7 @@ namespace UpholdSdk
         string _token;
 
         public UpholdAccounts Accounts { get; private set; }
+        public UpholdAuthenticationMethods AuthenticationMethods { get; private set; }
         public UpholdCards Cards { get; private set; }
         public UpholdCardAddresses CardAddresses { get; private set; }
         public UpholdTickers Tickers { get; private set; }
@@ -27,6 +28,7 @@ namespace UpholdSdk
             _clientSecret = clientSecret;
 
             Accounts = new UpholdAccounts(this);
+            AuthenticationMethods = new UpholdAuthenticationMethods(this);
             Cards = new UpholdCards(this);
             CardAddresses = new UpholdCardAddresses(this);
             Tickers = new UpholdTickers(this);
@@ -163,6 +165,28 @@ namespace UpholdSdk
             {
                 return _client.RequestGet<Models.Account>($"/v0/me/accounts/{accountId}", true);
             }
+
+        }
+
+        public sealed class UpholdAuthenticationMethods
+        {
+            UpholdClient _client;
+
+            internal UpholdAuthenticationMethods(UpholdClient client)
+            {
+                _client = client;
+            }
+
+            public List<Models.AuthenticationMethod> List()
+            {
+                return _client.RequestGetList<Models.AuthenticationMethod>("/v0/me/authentication_methods", true);
+            }
+
+            // todo : Add
+
+            // todo : Verify
+
+            // todo : Remove
 
         }
 
