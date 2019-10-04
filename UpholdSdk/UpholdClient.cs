@@ -16,6 +16,7 @@ namespace UpholdSdk
         public UpholdAccounts Accounts { get; private set; }
         public UpholdAuthenticationMethods AuthenticationMethods { get; private set; }
         public UpholdCards Cards { get; private set; }
+        public UpholdContacts Contacts { get; private set; }
         public UpholdCardAddresses CardAddresses { get; private set; }
         public UpholdTickers Tickers { get; private set; }
         public UpholdTransactions Transactions { get; private set; }
@@ -30,6 +31,7 @@ namespace UpholdSdk
             Accounts = new UpholdAccounts(this);
             AuthenticationMethods = new UpholdAuthenticationMethods(this);
             Cards = new UpholdCards(this);
+            Contacts = new UpholdContacts(this);
             CardAddresses = new UpholdCardAddresses(this);
             Tickers = new UpholdTickers(this);
             Transactions = new UpholdTransactions(this);
@@ -238,6 +240,29 @@ namespace UpholdSdk
                 var address = new Models.NewCardAddress() { network = network.ToString() };
                 return _client.RequestPost<Models.NewCardAddress, Models.CardAddress>($"/v0/me/cards/{cardId}/addresses", address);
             }
+
+        }
+
+        public sealed class UpholdContacts
+        {
+            UpholdClient _client;
+
+            internal UpholdContacts(UpholdClient client)
+            {
+                _client = client;
+            }
+
+            public List<Models.Contact> List()
+            {
+                return _client.RequestGetList<Models.Contact>("/v0/me/contacts", true);
+            }
+
+            public Models.Contact Details(string contactId)
+            {
+                return _client.RequestGet<Models.Contact>($"/v0/me/contacts/{contactId}", true);
+            }
+
+            // todo : Create
 
         }
 
