@@ -300,6 +300,14 @@ namespace UpholdSdk
                 return _client.RequestPost<Models.TransactionCommit, Models.Transaction>($"/v0/me/cards/{originCardId}/transactions/{newTrn.Id}/commit", cmt);
             }
 
+            // todo : Cancel
+
+            // todo : Resend
+
+            // todo : ListPublic
+
+            // todo : DetailsPublic
+
         }
 
     }
